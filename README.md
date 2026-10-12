@@ -8,6 +8,8 @@ Document QA uses a Retrieval-Augmented Generation (RAG) pipeline to find relevan
 
 The project explores how document chunking, semantic search, keyword search, and hybrid retrieval affect answer quality.
 
+https://github.com/user-attachments/assets/77281d7e-f759-4c4c-87d3-69ced63f8a03
+
 ## Features
 
 - Extract text from PDF documents.
