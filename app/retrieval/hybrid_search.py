@@ -7,7 +7,9 @@ def hybrid_search(
     question: str,
     limit: int = 5,
     candidate_limit: int = 20,
-    rrf_k: int = 60
+    rrf_k: int = 60,
+    qdrant_client=None,
+    collection_name: str | None = None
 ) -> list[dict]:
     """
     Combine vector and keyword rankings using
@@ -16,12 +18,16 @@ def hybrid_search(
 
     vector_results = search_documents(
         question=question,
-        limit=candidate_limit
+        limit=candidate_limit,
+        qdrant_client=qdrant_client,
+        collection_name=collection_name
     )
 
     keyword_results = search_by_keywords(
         question=question,
-        limit=candidate_limit
+        limit=candidate_limit,
+        qdrant_client=qdrant_client,
+        collection_name=collection_name
     )
 
     combined = {}
