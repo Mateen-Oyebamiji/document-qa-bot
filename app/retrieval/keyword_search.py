@@ -20,8 +20,13 @@ def tokenize(text: str) -> list[str]:
 
 def search_by_keywords(
     question: str,
-    limit: int = 5
+    limit: int = 5,
+    qdrant_client=None,
+    collection_name: str | None = None
 ) -> list[dict]:
+
+    qdrant_client = qdrant_client or client
+    collection_name = collection_name or COLLECTION_NAME
 
     query_tokens = [
         token
@@ -48,8 +53,8 @@ def search_by_keywords(
                 phrases.append(phrase)
 
     while True:
-        points, next_offset = client.scroll(
-            collection_name=COLLECTION_NAME,
+        points, next_offset = qdrant_client.scroll(
+            collection_name=collection_name,
             limit=100,
             offset=offset,
             with_payload=True,

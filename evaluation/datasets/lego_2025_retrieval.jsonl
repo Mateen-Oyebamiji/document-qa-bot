@@ -1,0 +1,43 @@
+{"id": "q01", "category": "fact", "question": "Who is the CEO of the LEGO Group?", "gold_pages": [4, 15], "evidence": ["Niels B Christiansen"]}
+{"id": "q02", "category": "fact", "question": "Who chairs the Board of Directors of LEGO A/S?", "gold_pages": [14], "evidence": ["He is Chair of the Board of LEGO A/S"]}
+{"id": "q03", "category": "fact", "question": "Who is the Deputy Chair of the board and what committee does he chair?", "gold_pages": [14], "evidence": ["serves as Deputy Chair and Chair of the Audit Committee"]}
+{"id": "q04", "category": "fact", "question": "How many LEGO stores were there worldwide at the end of 2025?", "gold_pages": [9], "evidence": ["1,112 stores in 54 markets"]}
+{"id": "q05", "category": "fact", "question": "How many new stores did the company open during the year?", "gold_pages": [9], "evidence": ["we opened 83 new stores"]}
+{"id": "q06", "category": "fact", "question": "How many products were in the 2025 portfolio?", "gold_pages": [8], "evidence": ["868 products, up from 840"]}
+{"id": "q07", "category": "fact", "question": "Which audit firm signed the independent auditor's report, and where was it signed?", "gold_pages": [84, 86], "evidence": ["Aarhus, 4 March 2026"]}
+{"id": "q08", "category": "fact", "question": "How large is the new factory in Vietnam?", "gold_pages": [9], "evidence": ["150,000 m² factory"]}
+{"id": "q09", "category": "fact", "question": "When will the new factory in Virginia be completed?", "gold_pages": [9], "evidence": ["scheduled for completion in 2027"]}
+{"id": "q10", "category": "fact", "question": "When did Alessandro Nasi join the Board?", "gold_pages": [14], "evidence": ["Alessandro Nasi was appointed to the Board of Directors in May 2025"]}
+{"id": "q11", "category": "fact", "question": "What is Colette Burke responsible for?", "gold_pages": [15], "evidence": ["Colette Burke is responsible for the LEGO Group's global commercial strategy"]}
+{"id": "q12", "category": "fact", "question": "What is the outlook for 2026?", "gold_pages": [13], "evidence": ["expects to achieve single-digit revenue growth"]}
+{"id": "q13", "category": "fact", "question": "By how much did consumer sales grow in 2025?", "gold_pages": [11], "evidence": ["increased its consumer sales by 16 percent"]}
+{"id": "q14", "category": "table", "question": "What was the LEGO Group's revenue in 2025?", "gold_pages": [6, 44, 51], "evidence": ["Revenue 2.1 83,530", "83,530 74,325"]}
+{"id": "q15", "category": "table", "question": "What were sales of goods in the Americas in 2025?", "gold_pages": [51], "evidence": ["Americas 38,429"]}
+{"id": "q16", "category": "table", "question": "How much licence income did the LEGO Group earn in 2025?", "gold_pages": [51], "evidence": ["Licence income 749"]}
+{"id": "q17", "category": "table", "question": "How much was spent on marketing in 2025?", "gold_pages": [52], "evidence": ["Marketing 10,151"]}
+{"id": "q18", "category": "table", "question": "What was the value of finished goods inventory at year end?", "gold_pages": [57], "evidence": ["Finished goods 2,922"]}
+{"id": "q19", "category": "table", "question": "What loss allowance rate is applied to receivables more than 180 days overdue?", "gold_pages": [58], "evidence": ["More than 180 days overdue 225 (192) 33 85%"]}
+{"id": "q20", "category": "table", "question": "What was the total remuneration of the Executive Leadership Team?", "gold_pages": [67], "evidence": ["Total remuneration 282"]}
+{"id": "q21", "category": "table", "question": "What was the effective tax rate in 2025?", "gold_pages": [53], "evidence": ["Effective tax rate 22.9%"]}
+{"id": "q22", "category": "table", "question": "What was operating profit in the consolidated income statement for 2025?", "gold_pages": [6, 44], "evidence": ["Operating profit 22,034"]}
+{"id": "q23", "category": "table", "question": "What was the consolidated profit before tax for 2025?", "gold_pages": [6, 44], "evidence": ["Profit before tax 21,687"]}
+{"id": "q24", "category": "table", "question": "What was the parent company's profit before tax in 2025?", "gold_pages": [72], "evidence": ["16,809"], "notes": "Parent company statement, not consolidated (21,687) - tests that the bot picks the right statement."}
+{"id": "q25", "category": "table", "question": "What was free cash flow in 2025?", "gold_pages": [6, 12, 47], "evidence": ["Free cash flow 10,783", "free cash flow of DKK 10.8 billion"]}
+{"id": "q26", "category": "table", "question": "What was the equity ratio in 2025?", "gold_pages": [6], "evidence": ["Equity ratio 62.2"]}
+{"id": "q27", "category": "table", "question": "What is the employee headcount?", "gold_pages": [6, 33, 42], "evidence": ["33,801"]}
+{"id": "q28", "category": "multi_hop", "question": "Which region had the fastest growth in sale of goods in 2025?", "gold_pages": [51], "evidence": ["Europe, Middle East & Africa 34,719 28,853"]}
+{"id": "q29", "category": "multi_hop", "question": "How much dividend was paid in 2025 and what dividend is proposed?", "gold_pages": [60], "evidence": ["Proposed dividend for 2025 is DKK 8,000 million"]}
+{"id": "q30", "category": "multi_hop", "question": "How much did the acquisition of the Discovery Centres cost and how much was allocated to goodwill?", "gold_pages": [70], "evidence": ["GBP 215 million (DKK 1,830 million)", "DKK 400 million to goodwill"]}
+{"id": "q31", "category": "multi_hop", "question": "Who owns LEGO A/S and in what proportions?", "gold_pages": [68], "evidence": ["LEGO Holding A/S (75%) and LEGO Foundation Investments A/S (25%)"]}
+{"id": "q32", "category": "multi_hop", "question": "How is free cash flow defined?", "gold_pages": [49], "evidence": ["Free cash flow Cash flow from operating activities - Cash flow used in investing activities"]}
+{"id": "q33", "category": "sustainability", "question": "What were total Scope 1 greenhouse gas emissions in 2025?", "gold_pages": [24], "evidence": ["Total Scope 1 21,019"]}
+{"id": "q34", "category": "sustainability", "question": "How much solar capacity was installed in Nyíregyháza, Hungary?", "gold_pages": [24], "evidence": ["8.61 MWp of capacity"]}
+{"id": "q35", "category": "sustainability", "question": "How many children were reached by social responsibility initiatives in 2025?", "gold_pages": [36], "evidence": ["impacted 11.7 million children in 27 countries"]}
+{"id": "q36", "category": "sustainability", "question": "What was the lost time injury rate in 2025?", "gold_pages": [33], "evidence": ["2025 0.8 2025 Target ≤0.9"], "notes": "Value sits in a KPI chart; text layer has only the raw numbers."}
+{"id": "q37", "category": "sustainability", "question": "Did the company meet its waste volume target for sites with production?", "gold_pages": [29, 41], "evidence": ["above our target of 30,200 tonnes", "Waste volume (sites with production) Tonnes ≤34,800 ≤30,200 31,701"], "notes": "Answer is no: 31,701 t vs <=30,200 t target."}
+{"id": "q38", "category": "sustainability", "question": "How many tonnes of waste went to landfill from production sites in 2025, versus the target?", "gold_pages": [41], "evidence": ["Waste to landfill (sites with production) Tonnes ≤1% ≤50 71"]}
+{"id": "q39", "category": "sustainability", "question": "What share of purchased materials came from mass balance or segregated sources?", "gold_pages": [28], "evidence": ["64 percent of the materials we bought"]}
+{"id": "q40", "category": "sustainability", "question": "What were Scope 1 and 2 carbon emissions from production sites compared with the target?", "gold_pages": [25, 41], "evidence": ["165.3"], "notes": "Value sits in a chart; 165.3 vs target <=162.5."}
+{"id": "q41", "category": "sustainability", "question": "What is the gender distribution at top management level?", "gold_pages": [34, 42], "evidence": ["Gender distribution at top management level"]}
+{"id": "q42", "category": "chart", "question": "How much did the LEGO Group invest in capacity in 2021?", "gold_pages": [12], "evidence": [], "notes": "Bar chart only (3.2 bDKK); no evidence string because the label is not attached to the number in the text layer."}
+{"id": "q43", "category": "chart", "question": "How many products were in the portfolio in 2021?", "gold_pages": [8], "evidence": [], "notes": "Bar chart only (734)."}

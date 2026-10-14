@@ -18,3 +18,7 @@ app/data/report.pdf
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Evaluation output: keep only the summary
+evaluation/results/*
+!evaluation/results/summary.md

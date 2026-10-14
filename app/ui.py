@@ -38,15 +38,20 @@ if st.button("Ask question", type="primary"):
                 ):
                     st.markdown(
                         f"**Source {index} — Page "
-                        f"{source.payload['page']}, "
-                        f"Chunk {source.payload['chunk']}**"
+                        f"{source['page']}, "
+                        f"Chunk {source['chunk']}**"
                     )
+
+                    vector_rank = source["vector_rank"] or "–"
+                    keyword_rank = source["keyword_rank"] or "–"
 
                     st.caption(
-                        f"Retrieval score: {source.score:.4f}"
+                        f"RRF score: {source['rrf_score']:.4f} · "
+                        f"vector rank: {vector_rank} · "
+                        f"keyword rank: {keyword_rank}"
                     )
 
-                    st.write(source.payload["text"])
+                    st.write(source["text"])
                     st.divider()
 
         except Exception as error:
