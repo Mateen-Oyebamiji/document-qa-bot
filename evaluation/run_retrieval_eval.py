@@ -203,6 +203,125 @@ def retrieve(retriever, question, limit, client, collection_name):
 def pct(value):
     return "–" if value is None else f"{value * 100:.0f}%"
 
+def markdown_table(headers, rows):
+    lines = [
+        "| " + " | ".join(headers) + " |",
+        "|" + "|".join("---" for _ in headers) + "|",
+    ]
+    lines += ["| " + " | ".join(str(cell) for cell in row) + " |" for row in rows]
+    return "\n".join(lines)
+
+
+def write_reports(args, ks, context_k, dataset, config_rows, question_rows):
+    out_dir = Path(args.out)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    # Per-question detail, for digging into misses.
+    with open(out_dir / "per_question.csv", "w", newline="", encoding="utf-8") as file:
+        fields = [
+            "chunker", "retriever", "id", "category", "question",
+            "gold_pages", "retrieved_pages", "page_rank",
+            "evidence_rank", "context_words",
+        ]
+        writer = csv.DictWriter(file, fieldnames=fields, extrasaction="ignore")
+        writer.writeheader()
+        for row in question_rows:
+            writer.writerow({
+                **row,
+                "gold_pages": " ".join(map(str, row["gold_pages"])),
+                "retrieved_pages": " ".join(map(str, row["retrieved_pages"])),
+            })
+
+    with open(out_dir / "summary.json", "w", encoding="utf-8") as file:
+        json.dump(
+            {
+                "generated": datetime.now().isoformat(timespec="seconds"),
+                "pdf": args.pdf,
+                "dataset": args.dataset,
+                "embedding_model": MODEL_NAME,
+                "results": config_rows,
+            },
+            file,
+            indent=2,
+        )
+
+    # Markdown report.
+    headers = (
+        ["Chunking", "Retriever", "Chunks", "Median words", "Truncated"]
+        + [f"Hit@{k}" for k in ks]
+        + ["MRR", f"Evidence@{context_k}", f"Words in top {context_k}"]
+    )
+    table = [
+        [
+            row["chunker"], row["retriever"], row["chunks"],
+            f"{row['median_words']:.0f}", pct(row["truncated_share"]),
+        ]
+        + [pct(row[f"hit@{k}"]) for k in ks]
+        + [
+            f"{row['mrr']:.2f}",
+            pct(row.get(f"evidence@{context_k}")),
+            f"{row['context_words']:.0f}",
+        ]
+        for row in config_rows
+    ]
+
+    categories = sorted({example["category"] for example in dataset})
+    category_counts = defaultdict(int)
+    for example in dataset:
+        category_counts[example["category"]] += 1
+    category_table = [
+        [row["chunker"], row["retriever"]]
+        + [pct(row["by_category"][c][f"hit@{context_k}"]) for c in categories]
+        for row in config_rows
+    ]
+
+    misses = defaultdict(int)
+    configs = len(config_rows)
+    for row in question_rows:
+        if row["page_rank"] is None or row["page_rank"] > context_k:
+            misses[(row["id"], row["question"])] += 1
+    hardest = sorted(misses.items(), key=lambda item: -item[1])[:10]
+
+    descriptions = "\n".join(
+        f"- `{name}`: {CHUNKERS[name][0]}"
+        for name in dict.fromkeys(row["chunker"] for row in config_rows)
+    )
+
+    report = f"""# Retrieval evaluation
+
+Generated {datetime.now():%Y-%m-%d %H:%M} · {len(dataset)} questions · embedding model `{MODEL_NAME}`
+
+## Chunking strategies
+
+{descriptions}
+
+## Results
+
+{markdown_table(headers, table)}
+
+- **Hit@k**: share of questions where a chunk from a gold page is in the top k.
+- **MRR**: mean of 1/rank of the first gold-page chunk (0 if not in the top {max(ks)}).
+- **Evidence@{context_k}**: share of questions where the exact evidence text is inside a top-{context_k} chunk (stricter; {config_rows[0].get('n_evidence', 0)} questions have evidence strings).
+- **Truncated**: chunks longer than the embedding model's input window. The model never sees the text past that point.
+- **Words in top {context_k}**: how much text the LLM would receive. Larger chunks buy hit rate with more context; compare at similar budgets.
+
+## Hit@{context_k} by question category
+
+{markdown_table(["Chunking", "Retriever"] + [f"{c} (n={category_counts[c]})" for c in categories], category_table)}
+
+## Hardest questions
+
+Missed at k={context_k} by this many of the {configs} configurations:
+
+{markdown_table(["Id", "Question", "Misses"], [[qid, question, f"{count}/{configs}"] for (qid, question), count in hardest])}
+
+Per-question ranks are in `per_question.csv`.
+"""
+
+    (out_dir / "summary.md").write_text(report, encoding="utf-8")
+    print(f"\nReports written to {out_dir}/ (summary.md, summary.json, per_question.csv)")
+
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
@@ -324,6 +443,9 @@ def main():
                 f"evidence@{context_k} "
                 f"{pct(summary.get(f'evidence@{context_k}'))}"
             )
+        
+    write_reports(args, ks, context_k, dataset, config_rows, question_rows)
+
 
 
 if __name__ == "__main__":
